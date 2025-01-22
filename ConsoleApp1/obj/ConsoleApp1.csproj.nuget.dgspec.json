@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\proyecto1\\proyecto1.csproj": {}
+    "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\proyecto1\\proyecto1.csproj": {
+    "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\proyecto1\\proyecto1.csproj",
-        "projectName": "proyecto1",
-        "projectPath": "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\proyecto1\\proyecto1.csproj",
+        "projectUniqueName": "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectName": "ConsoleApp1",
+        "projectPath": "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\ConsoleApp1\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\raulp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\proyecto1\\obj\\",
+        "outputPath": "C:\\Users\\raulp\\OneDrive\\Documentos\\proyecto\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\raulp\\AppData\\Roaming\\NuGet\\NuGet.Config"
