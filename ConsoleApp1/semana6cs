@@ -1,0 +1,151 @@
+class NodoEstudiante:
+    def __init__(self, cedula, nombre, apellido, correo, nota_definitiva):
+        self.cedula = cedula
+        self.nombre = nombre
+        self.apellido = apellido
+        self.correo = correo
+        self.nota_definitiva = nota_definitiva
+        self.siguiente = None
+
+
+class ListaEstudiantes:
+    def __init__(self):
+        self.aprobados = None  # Lista para estudiantes aprobados
+        self.reprobados = None  # Lista para estudiantes reprobados
+
+    def agregar_estudiante(self, cedula, nombre, apellido, correo, nota_definitiva):
+        nuevo_estudiante = NodoEstudiante(cedula, nombre, apellido, correo, nota_definitiva)
+        if nota_definitiva >= 7:
+            # Insertar al inicio de la lista de aprobados
+            nuevo_estudiante.siguiente = self.aprobados
+            self.aprobados = nuevo_estudiante
+            print(f"Estudiante {nombre} agregado a la lista de aprobados.")
+        else:
+            # Insertar al final de la lista de reprobados
+            if not self.reprobados:
+                self.reprobados = nuevo_estudiante
+            else:
+                actual = self.reprobados
+                while actual.siguiente:
+                    actual = actual.siguiente
+                actual.siguiente = nuevo_estudiante
+            print(f"Estudiante {nombre} agregado a la lista de reprobados.")
+
+    def buscar_estudiante(self, cedula):
+        # Buscar en la lista de aprobados
+        actual = self.aprobados
+        while actual:
+            if actual.cedula == cedula:
+                return f"Estudiante encontrado en aprobados: {actual.nombre} {actual.apellido}, Nota: {actual.nota_definitiva}"
+            actual = actual.siguiente
+
+        # Buscar en la lista de reprobados
+        actual = self.reprobados
+        while actual:
+            if actual.cedula == cedula:
+                return f"Estudiante encontrado en reprobados: {actual.nombre} {actual.apellido}, Nota: {actual.nota_definitiva}"
+            actual = actual.siguiente
+
+        return "Estudiante no encontrado."
+
+    def eliminar_estudiante(self, cedula):
+        # Eliminar de la lista de aprobados
+        self.aprobados = self._eliminar_nodo(self.aprobados, cedula)
+        # Eliminar de la lista de reprobados
+        self.reprobados = self._eliminar_nodo(self.reprobados, cedula)
+
+    def _eliminar_nodo(self, cabeza, cedula):
+        if not cabeza:
+            return cabeza
+
+        if cabeza.cedula == cedula:
+            print(f"Estudiante con cédula {cedula} eliminado.")
+            return cabeza.siguiente
+
+        actual = cabeza
+        while actual.siguiente:
+            if actual.siguiente.cedula == cedula:
+                print(f"Estudiante con cédula {cedula} eliminado.")
+                actual.siguiente = actual.siguiente.siguiente
+                return cabeza
+            actual = actual.siguiente
+
+        return cabeza
+
+    def total_aprobados(self):
+        return self._contar_nodos(self.aprobados)
+
+    def total_reprobados(self):
+        return self._contar_nodos(self.reprobados)
+
+    def _contar_nodos(self, cabeza):
+        contador = 0
+        actual = cabeza
+        while actual:
+            contador += 1
+            actual = actual.siguiente
+        return contador
+
+    def mostrar_listas(self):
+        print("\nEstudiantes aprobados:")
+        self._imprimir_lista(self.aprobados)
+        print("\nEstudiantes reprobados:")
+        self._imprimir_lista(self.reprobados)
+
+    def _imprimir_lista(self, cabeza):
+        actual = cabeza
+        while actual:
+            print(f"{actual.cedula} - {actual.nombre} {actual.apellido} - Nota: {actual.nota_definitiva}")
+            actual = actual.siguiente
+
+
+# Interfaz del programa
+def main():
+    sistema = ListaEstudiantes()
+
+    while True:
+        print("\n--- Sistema de Registro de Estudiantes de Redes III ---")
+        print("1. Agregar estudiante")
+        print("2. Buscar estudiante por cédula")
+        print("3. Eliminar estudiante")
+        print("4. Total de estudiantes aprobados")
+        print("5. Total de estudiantes reprobados")
+        print("6. Mostrar listas de estudiantes")
+        print("7. Salir")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            cedula = input("Ingrese la cédula: ")
+            nombre = input("Ingrese el nombre: ")
+            apellido = input("Ingrese el apellido: ")
+            correo = input("Ingrese el correo: ")
+            nota_definitiva = float(input("Ingrese la nota definitiva (1-10): "))
+            sistema.agregar_estudiante(cedula, nombre, apellido, correo, nota_definitiva)
+
+        elif opcion == "2":
+            cedula = input("Ingrese la cédula del estudiante a buscar: ")
+            print(sistema.buscar_estudiante(cedula))
+
+        elif opcion == "3":
+            cedula = input("Ingrese la cédula del estudiante a eliminar: ")
+            sistema.eliminar_estudiante(cedula)
+
+        elif opcion == "4":
+            print(f"Total de estudiantes aprobados: {sistema.total_aprobados()}")
+
+        elif opcion == "5":
+            print(f"Total de estudiantes reprobados: {sistema.total_reprobados()}")
+
+        elif opcion == "6":
+            sistema.mostrar_listas()
+
+        elif opcion == "7":
+            print("Saliendo del sistema...")
+            break
+
+        else:
+            print("Opción no válida, intente nuevamente.")
+
+
+if __name__ == "__main__":
+    main()
